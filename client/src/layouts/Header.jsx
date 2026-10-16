@@ -2,7 +2,7 @@ import {NavLink} from 'react-router-dom'
 
 const Header = () => {
     return(
-        <header>
+        <header className='header'>
             <nav>
                 <NavLink to='/'>Home</NavLink>
                 <NavLink to='/products'>상품목록</NavLink>
