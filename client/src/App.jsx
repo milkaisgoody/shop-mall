@@ -1,9 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Header from './layouts/Header'
 import Main from './layouts/Main'
 import ProductList from './products/ProductList'
 import ProductInfo from './products/ProductInfo'
+import AddProduct from './products/AddProduct'
+import UpdateProduct from './products/UpdateProduct'
 
 function App() {
 
@@ -17,11 +19,12 @@ function App() {
               <Route path='/' element={<Main />} />
               <Route path='/products' element={<ProductList />} />
               <Route path='/products/:id' element={<ProductInfo />} />
+              <Route path='/products/new' element={<AddProduct />} />
+              <Route path='/products/update/:id' element={<UpdateProduct />} />
             </Routes>
           </div>
         </BrowserRouter>
       </section>
-
     </>
   )
 }
