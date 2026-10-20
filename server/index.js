@@ -22,6 +22,7 @@ const db = mysql.createConnection({
 });
 
 // mysql dbms에 연결
+// mysql dbms에 연결
 db.connect((err) => {
     if(err){
         console.error("DB 연결 오류!!", err);
@@ -58,8 +59,8 @@ app.post("/api/products", (req, res) => {
     const sql = "INSERT INTO product(product_name, price, description) VALUES (?, ?, ?)";
     db.query(sql, [productName, price, description], (err) => {
         if(err){
-            console.log("상품 조회 오류!! ", err);
-            res.send("상품 조회 중 오류 발생!!");
+            console.log("상품 등록 오류!! ", err);
+            res.send("상품 등록 중 오류 발생!!");
             return;
         }
         res.send("상품 등록 완료!!");
@@ -73,7 +74,7 @@ app.get("/api/products/:id", (req, res) => {
     db.query(sql, [productId], (err, results) => {
         if(err){
             console.log("상품 조회 에러: ", err);
-            res.send("상품 조회 중 오류가 발생했습니다.");
+            res.send("상품 상세 조회 중 오류가 발생했습니다.");
             return;
         }
         res.json(results[0]);  //1건(맨 앞)
@@ -87,8 +88,8 @@ app.delete("/api/products/:id", (req, res) => {
     const sql = "DELETE FROM product WHERE id = ?";
     db.query(sql, [productId], (err) => {
         if(err){
-            console.log("상품 조회 에러: ", err);
-            res.send("상품 조회 중 오류가 발생했습니다.");
+            console.log("상품 삭제 에러: ", err);
+            res.send("상품 삭제 중 오류가 발생했습니다.");
             return;
         }
         res.send("상품이 성공적으로 삭제되었습니다.");
@@ -142,10 +143,22 @@ app.post("/api/users", (req, res) => {
         }
         res.send("회원이 성공적으로 가입되었습니다.");
     });
+});
+
+
+//회원 조회(로그인)
+app.get("/api/users/:username", (req,res) => {
+    const username = req.params.username; //요청한 아이디
+    const sql = "SELECT * FROM users WHERE username = ?";
+    db.query(sql, [username], (err, results) => {
+        if(err){
+            console.log("회원 조회 에러: ", err);
+            res.send("회원 조회 중 오류가 발생했습니다.");
+            return;
+        }
+        res.json(results[0]); //요청한 곳으로 반환(응답)
+    });
 })
-
-
-
 
 
 
