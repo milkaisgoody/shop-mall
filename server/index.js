@@ -1,5 +1,5 @@
 import express from "express"
-import mysql from "mysql2"
+import pg from 'pg'
 import cors from 'cors'
 
 // app 객체 생성
@@ -12,9 +12,8 @@ app.use(cors({
     origin: "http://localhost:5173",
 }))
 
-// mysql 연결 설정
-// host
-const db = mysql.createConnection({
+// postgreSQL 연결 설정
+const db = new pg.Client({
     host: "localhost",
     user: "jsuser",
     password: "pwjs",
